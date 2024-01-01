@@ -1,14 +1,57 @@
 = Jooq Generator
 
-Idea: Use a spring-boot commandline app to generate the JOOQ code:
+Idea: Use a spring-boot commandline app to generate the JOOQ code.
+This scope of this project should only restrict to JOOQ Code Generation and not be an application in addition.
 
-- Spring Boot to benefit from the spring features like dependency injection, testcontainer support
-- Commandline bc. the code needs to be generated only once
+== Technology / Architecture
 
+Use Spring Boot with Testcontainers support.
+
+Why? Because:
+
+* With Spring Boot one can benefit from the spring features like
+** testcontainer support
+** automatic schema creation support (through schema.sql or flyway-migrations)
+** dependency injection support
+
+* Commandline bc. the code needs to be generated only once
+
+Note: Spring Boot could be replaced with a standard Java main program, as long
+as the testcontainers and the automatic schema creation can be supported.
 
 During startup the JOOQ Code Generator will be invoked programmatically and not in the build script.
 
-This scope of this project should only restrict to JOOQ Code Generation and not be an application in addition.
+
+== Use Cases
+
+=== Existing DB
+
+If you just have a running DB somewhere adjust the properties in
+`org.svenehrke.springcmdlinejooq.SpringCmdlineJooqApplication.generateJooqCode()`
+and run the application.
+
+=== Existing project with schema.sql
+
+* Copy `schema.sql` from your project into this one to `src/main/resources`
+and run the application.
+
+=== Existing project which uses flyway
+
+* Copy the flyway migrations from your project into this one to `src/main/resources/db/migration`
+and run the application.
+
+For all usecases:
+having ran the application copy the generated sources from `build/generated/sources/jooq`
+into the source of your target project.
+Add the jooq dependency to your target's build system.
+Done.
+
+
+== Improvement ideas
+
+- somehow link `schema.sql` or flyway migration scripts instead of copying them into this project
+- try to do it in a simple JBang script
+
 
 == Infos
 
