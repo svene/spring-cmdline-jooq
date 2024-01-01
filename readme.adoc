@@ -1,0 +1,17 @@
+= Jooq Generator
+
+Idea: Use a spring-boot commandline app to generate the JOOQ code:
+
+- Spring Boot to benefit from the spring features like dependency injection, testcontainer support
+- Commandline bc. the code needs to be generated only once
+
+
+During startup the JOOQ Code Generator will be invoked programmatically and not in the build script.
+
+This scope of this project should only restrict to JOOQ Code Generation and not be an application in addition.
+
+== Infos
+
+- https://www.baeldung.com/spring-boot-console-app[Bealdung Spring-Boot console application]
+
+
